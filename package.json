@@ -1,0 +1,30 @@
+{
+  "name": "backend-portifolio-pessoal-mentoria",
+  "version": "1.0.0",
+  "description": "Esse projeto está sendo desenvolvido no periodo da Mentoria 2.0 e será utilizado como portifólio pessoal para entrevistas.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.1",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "supertest": "^7.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pezzi77/backend-portifolio-pessoal-mentoria.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Pezzi77/backend-portifolio-pessoal-mentoria/issues"
+  },
+  "homepage": "https://github.com/Pezzi77/backend-portifolio-pessoal-mentoria#readme"
+}
