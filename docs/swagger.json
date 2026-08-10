@@ -59,6 +59,7 @@
       "post": {
         "tags": ["Auth"],
         "summary": "Cadastro de instrutor",
+        "security": [{ "bearerAuth": [] }],
         "requestBody": {
           "required": true,
           "content": {

@@ -1,4 +1,12 @@
-const users = [];
+const users = [
+  {
+    id: 'instrutor-0',
+    name: 'felipe',
+    email: 'felipe@academia.com',
+    password: '123456',
+    role: 'instrutor'
+  }
+];
 const frequencies = [];
 const studentSheets = [];
 

@@ -5,7 +5,7 @@ const authMiddleware = require('../middlewares/authMiddleware');
 const router = express.Router();
 
 router.post('/auth/login', controller.login);
-router.post('/instructors/register', controller.registerInstructor);
+router.post('/instructors/register', authMiddleware.requireInstructor, controller.registerInstructor);
 
 router.post('/students/register', controller.registerStudent);
 router.get('/students/me', authMiddleware.requireAuthenticatedUser, controller.getCurrentStudent);
