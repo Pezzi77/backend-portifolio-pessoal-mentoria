@@ -206,7 +206,7 @@
     "/students/{id}/sheet": {
       "post": {
         "tags": ["Ficha"],
-        "summary": "Inserir ou atualizar ficha do aluno",
+        "summary": "Inserir ficha do aluno",
         "security": [{ "bearerAuth": [] }],
         "parameters": [
           { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
@@ -224,6 +224,44 @@
         "responses": {
           "201": {
             "description": "Ficha atribuída ao aluno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string" },
+                    "sheet": { "$ref": "#/components/schemas/StudentSheet" }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "409": { "description": "Ficha já existe para este aluno" }
+        }
+      },
+      "patch": {
+        "tags": ["Ficha"],
+        "summary": "Atualizar ficha do aluno",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudentSheet"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ficha atualizada",
             "content": {
               "application/json": {
                 "schema": {

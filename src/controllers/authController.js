@@ -73,6 +73,15 @@ const createStudentSheet = (req, res, next) => {
   }
 };
 
+const updateStudentSheet = (req, res, next) => {
+  try {
+    const result = authService.updateStudentSheet(req.params.id, req.body);
+    res.status(200).json({ message: 'Ficha atualizada com sucesso', sheet: result.sheet });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const getStudentSheet = (req, res, next) => {
   try {
     const sheet = authService.getStudentSheet(req.params.id);
@@ -100,5 +109,6 @@ module.exports = {
   getCurrentStudent,
   getStudentSheet,
   createStudentSheet,
+  updateStudentSheet,
   registerFrequency
 };

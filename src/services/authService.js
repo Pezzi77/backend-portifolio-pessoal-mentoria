@@ -74,6 +74,18 @@ const createStudentSheet = (studentId, sheet) => {
   return { student, sheet: assignedSheet.sheet };
 };
 
+const updateStudentSheet = (studentId, sheet) => {
+  const student = getStudentById(studentId);
+  if (!student) {
+    const error = new Error('Aluno não encontrado');
+    error.statusCode = 404;
+    throw error;
+  }
+
+  const updatedSheet = store.updateStudentSheet(studentId, sheet);
+  return { student, sheet: updatedSheet.sheet };
+};
+
 const getStudentSheet = (id) => {
   const student = getStudentById(id);
   if (!student) {
@@ -108,5 +120,7 @@ module.exports = {
   getStudentById,
   getAllStudents,
   getStudentSheet,
+  createStudentSheet,
+  updateStudentSheet,
   registerFrequency
 };

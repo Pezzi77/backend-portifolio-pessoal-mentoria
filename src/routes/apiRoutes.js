@@ -12,6 +12,7 @@ router.get('/students/me', authMiddleware.requireAuthenticatedUser, controller.g
 router.get('/students', authMiddleware.requireInstructor, controller.getStudents);
 router.get('/students/:id', authMiddleware.requireInstructor, controller.getStudentDetails);
 router.post('/students/:id/sheet', authMiddleware.requireInstructor, controller.createStudentSheet);
+router.patch('/students/:id/sheet', authMiddleware.requireInstructor, controller.updateStudentSheet);
 router.get('/students/:id/sheet', authMiddleware.requireAuthenticatedUser, controller.getStudentSheet);
 router.post('/students/:id/frequency', authMiddleware.requireAuthenticatedUser, controller.registerFrequency);
 

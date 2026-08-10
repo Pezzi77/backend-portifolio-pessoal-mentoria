@@ -46,13 +46,26 @@ const getFrequenciesByStudent = (studentId) => frequencies.filter((item) => item
 const createStudentSheet = (studentId, sheet) => {
   const existing = studentSheets.find((item) => item.studentId === studentId);
   if (existing) {
-    existing.sheet = sheet;
-    return existing;
+    const error = new Error('Ficha já existe para este aluno');
+    error.statusCode = 409;
+    throw error;
   }
 
   const studentSheet = { studentId, sheet };
   studentSheets.push(studentSheet);
   return studentSheet;
+};
+
+const updateStudentSheet = (studentId, sheet) => {
+  const existing = studentSheets.find((item) => item.studentId === studentId);
+  if (!existing) {
+    const error = new Error('Ficha não encontrada para este aluno');
+    error.statusCode = 404;
+    throw error;
+  }
+
+  existing.sheet = sheet;
+  return existing;
 };
 
 const getStudentSheet = (studentId) => {
