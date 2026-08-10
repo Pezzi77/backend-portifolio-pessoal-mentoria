@@ -34,6 +34,9 @@ API REST criada com Express para cadastrar instrutores, cadastrar alunos, gerenc
    ```text
    http://localhost:3000/api-docs
    ```
+## Credenciais iniciais para instrutor:
+- email: felipe@academia.com
+- senha: 123456
 
 ## Exemplos de uso
 
