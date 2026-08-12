@@ -40,7 +40,7 @@ API REST criada com Express para cadastrar instrutores, cadastrar alunos, gerenc
 
 ## Exemplos de uso
 
-- Para cadastrar um instrutor, envie os dados de nome, e-mail e senha em uma requisição de cadastro.
+- Para cadastrar um instrutor, apenas outro instrutor já cadastrado consegue a solicitação. Utilizar as credenciais iniciais.
 - Para cadastrar um aluno, envie o nome, e-mail, senha e informações físicas do aluno em uma requisição de cadastro.
 - Para fazer login, envie as credenciais de e-mail e senha e receba um token JWT para autenticação.
 - Para consultar a ficha do aluno, utilize o token JWT na requisição e solicite os dados de ficha associados ao aluno autenticado.
