@@ -113,6 +113,18 @@ const registerFrequency = (studentId, date) => {
   return { studentId, date, frequency };
 };
 
+const getFrequencies = (studentId) => {
+  const student = getStudentById(studentId);
+  if (!student) {
+    const error = new Error('Aluno não encontrado');
+    error.statusCode = 404;
+    throw error;
+  }
+
+  const frequencies = store.getFrequenciesByStudent(studentId);
+  return frequencies;
+};
+
 module.exports = {
   registerInstructor,
   registerStudent,
@@ -123,4 +135,5 @@ module.exports = {
   createStudentSheet,
   updateStudentSheet,
   registerFrequency
+  ,getFrequencies
 };

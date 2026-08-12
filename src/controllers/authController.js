@@ -100,6 +100,15 @@ const registerFrequency = (req, res, next) => {
   }
 };
 
+const getFrequencies = (req, res, next) => {
+  try {
+    const frequencies = authService.getFrequencies(req.params.id);
+    res.status(200).json({ studentId: req.params.id, frequencies });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   registerInstructor,
   registerStudent,
@@ -111,4 +120,5 @@ module.exports = {
   createStudentSheet,
   updateStudentSheet,
   registerFrequency
+  ,getFrequencies
 };

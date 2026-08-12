@@ -15,5 +15,6 @@ router.post('/students/:id/sheet', authMiddleware.requireInstructor, controller.
 router.patch('/students/:id/sheet', authMiddleware.requireInstructor, controller.updateStudentSheet);
 router.get('/students/:id/sheet', authMiddleware.requireAuthenticatedUser, controller.getStudentSheet);
 router.post('/students/:id/frequency', authMiddleware.requireAuthenticatedUser, controller.registerFrequency);
+router.get('/students/:id/frequency', authMiddleware.requireInstructor, controller.getFrequencies);
 
 module.exports = router;

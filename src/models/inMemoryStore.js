@@ -91,6 +91,7 @@ module.exports = {
   addFrequency,
   getFrequenciesByStudent,
   createStudentSheet,
+  updateStudentSheet,
   getStudentSheet,
   getSheetTemplate
 };
