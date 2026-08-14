@@ -1,0 +1,32 @@
+import http from 'k6/http'
+import { sleep, check } from 'k6'
+
+export const options = {
+  iterations: 50,
+  thresholds: {
+    http_req_duration: ['p(90)<10', 'max<10'],
+    http_req_failed: ['rate<0.01']
+  }
+}
+export default function () {
+  const url = 'http://localhost:3000/auth/login';
+
+  const payload = JSON.stringify({
+    email: 'felipe@academia.com',
+    password: '123456',
+  })
+
+  const params = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }
+
+  const res = http.post(url, payload, params)
+
+  check(res, {
+    'Validar que o Status é 200': (r) => r.status === 200,
+    'Validar que o token é string': (r) => typeof(r.json().token) === 'string'
+  })
+sleep(1)
+}
