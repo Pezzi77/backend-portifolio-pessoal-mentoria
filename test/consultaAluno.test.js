@@ -35,12 +35,21 @@ describe('Alunos', () => {
     });
     
     describe('GET /students/{id}', () => {
-        it('Deve retornar sucesso com 200 quando consultado por um admin', async () => {
+        it('Deve retornar sucesso com 200 quando consultado por um instrutor', async () => {
             const resposta = await request(process.env.BASE_URL) 
                 .get('/students/aluno-0')
                 .set('Authorization', `Bearer ${tokenAdmin}`); 
 
             expect(resposta.status).to.equal(200);
+            expect(resposta.body.student.id).to.equal('aluno-0');
+        });
+
+        it('Deve retornar acesso negado com 403 quando consultado por um aluno', async () => {
+            const resposta = await request(process.env.BASE_URL) 
+                .get('/students/aluno-0')
+                .set('Authorization', `Bearer ${tokenAluno}`); 
+
+            expect(resposta.status).to.equal(403);
         });
     });
 });
