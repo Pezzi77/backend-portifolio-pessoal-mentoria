@@ -8,7 +8,7 @@ router.post('/auth/login', controller.login);
 router.post('/instructors/register', authMiddleware.requireInstructor, controller.registerInstructor);
 
 router.post('/students/register', controller.registerStudent);
-router.get('/students/me', authMiddleware.requireAuthenticatedUser, controller.getCurrentStudent);
+router.get('/me', authMiddleware.requireAuthenticatedUser, controller.getCurrentStudent);
 router.get('/students', authMiddleware.requireInstructor, controller.getStudents);
 router.get('/students/:id', authMiddleware.requireInstructor, controller.getStudentDetails);
 router.post('/students/:id/sheet', authMiddleware.requireInstructor, controller.createStudentSheet);
