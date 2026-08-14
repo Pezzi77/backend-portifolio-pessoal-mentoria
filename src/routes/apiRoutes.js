@@ -6,11 +6,25 @@ const router = express.Router();
 
 // Health check route
 router.get('/health', (req, res) => {
-	res.json({
-		status: 'ok',
-		uptime: process.uptime(),
-		timestamp: new Date().toISOString(),
-	});
+	try {
+		// Aplicação sobrecarregada
+		if (process.env.MAINTENANCE === 'true') {
+			return res.status(503).json({
+				status: 'unavailable',
+				message: 'Service temporarily unavailable (maintenance)'
+			});
+		}
+
+		// Resposta normal
+		return res.status(200).json({
+			status: 'ok',
+			uptime: process.uptime(),
+			timestamp: new Date().toISOString(),
+		});
+	} catch (err) {
+		// Error
+		return res.status(500).json({ message: 'Internal server error' });
+	}
 });
 
 router.post('/auth/login', controller.login);
