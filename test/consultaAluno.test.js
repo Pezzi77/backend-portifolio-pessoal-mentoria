@@ -1,7 +1,7 @@
-const request = require('supertest');
-const { expect } = require('chai');
-require('dotenv').config();
-const { obterToken } = require('../helpers/autenticacao');
+const request = require('supertest')
+const { expect } = require('chai')
+require('dotenv').config()
+const { obterToken } = require('../helpers/autenticacao')
 
 describe('Alunos', () => {
     // 1. Declaramos as variáveis para os tokens dos dois perfis
