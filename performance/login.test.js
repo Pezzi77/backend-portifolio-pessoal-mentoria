@@ -1,15 +1,11 @@
 import http from 'k6/http'
 import { sleep, check } from 'k6'
-const postLogin = JSON.parseopen ('../fixtures/postLogin.json')
+const postLogin = JSON.parse(open('../fixtures/postLogin'))
 
 export const options = {
-  stages: [
-    { duration: '5s', target: 10},
-    { duration: '20s', target: 10},
-    { duration: '5s', target: 0},    
-  ],
+  iterations: 50,
   thresholds: {
-    http_req_duration: ['p(90)<3000', 'max<5000'],
+    http_req_duration: ['p(90)<10', 'max<10'],
     http_req_failed: ['rate<0.01']
   }
 }
