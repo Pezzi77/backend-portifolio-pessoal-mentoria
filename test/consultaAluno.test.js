@@ -1,10 +1,10 @@
 const request = require('supertest');
 const {expect} = require('chai')
-
+require('dotenv').config()
 describe('Alunos', () => {
     describe('GET /students', () => {
         it('Deve retornar sucesso com 200 quando a listagem for consultada pelo instrutor', async() => {
-             const respostaLoginInstrutor = await request('http://localhost:3000')
+             const respostaLoginInstrutor = await request(process.env.BASE_URL)
                 .post('/auth/login')
                 .set('Content-Type', 'application/json')
                 .send({
@@ -14,7 +14,7 @@ describe('Alunos', () => {
 
             const token = respostaLoginInstrutor.body.token
 
-            const resposta = await request ('http://localhost:3000')
+            const resposta = await request (process.env.BASE_URL)
             .get('/students')
             .set('Content-Type', 'application/json')
             .set('Authorization', `Bearer ${token}`)

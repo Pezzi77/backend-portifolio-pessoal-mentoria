@@ -1,10 +1,11 @@
 const request = require('supertest');
 const {expect} = require('chai')
+require('dotenv').config
 
 describe('Login', () => {
     describe('POST /auth/login', () => {
         it('Deve retornar 200 com um token em string quando usar credenciais válidas', async () => {
-            const resposta = await request('http://localhost:3000')
+            const resposta = await request(process.env.BASE_URL)
                 .post('/auth/login')
                 .set('Content-Type', 'application/json')
                 .send({
@@ -16,7 +17,7 @@ describe('Login', () => {
             expect(resposta.body.token).to.be.a('string');           
         })
         it('Deve retornar 401 usúario com uma credencial inválida', async () => {
-            const resposta = await request('http://localhost:3000')
+            const resposta = await request(process.env.BASE_URL)
                 .post('/auth/login')
                 .set('Content-Type', 'application/json')
                 .send({

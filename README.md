@@ -26,11 +26,15 @@ API REST criada com Express para cadastrar instrutores, cadastrar alunos, gerenc
    ```bash
    npm install
    ```
-2. Inicie a aplicação:
+2. Crie um arquivo `.env` na raiz do projeto com a variável abaixo:
+   ```env
+   BASE_URL=http://localhost:3000
+   ```
+3. Inicie a aplicação:
    ```bash
    npm start
    ```
-3. Acesse a documentação Swagger em:
+4. Acesse a documentação Swagger em:
    ```text
    http://localhost:3000/api-docs
    ```
