@@ -21,6 +21,7 @@ API REST construída com Node.js e Express para gerenciar instrutores, alunos, f
 - CRUD para Gestão de ficha de treino (para instrutores)
 - Registro de frequência do aluno
 - Documentação Swagger disponível em `/api-docs`
+ - Rota de health-check: `GET /health` — retorna status, uptime e timestamp
 
 **Estrutura de diretórios (resumida)**
 - `src/`

@@ -4,6 +4,15 @@ const authMiddleware = require('../middlewares/authMiddleware');
 
 const router = express.Router();
 
+// Health check route
+router.get('/health', (req, res) => {
+	res.json({
+		status: 'ok',
+		uptime: process.uptime(),
+		timestamp: new Date().toISOString(),
+	});
+});
+
 router.post('/auth/login', controller.login);
 router.post('/instructors/register', authMiddleware.requireInstructor, controller.registerInstructor);
 
