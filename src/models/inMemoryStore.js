@@ -5,6 +5,13 @@ const users = [
     email: 'felipe@academia.com',
     password: '123456',
     role: 'instrutor'
+  },
+  {
+    id: 'aluno-0',
+    name: 'lucas',
+    email: 'lucas@academia.com',
+    password: '123456',
+    role: 'aluno'
   }
 ];
 const frequencies = [];
