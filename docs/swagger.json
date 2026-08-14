@@ -13,6 +13,7 @@
     { "name": "Alunos", "description": "Operações para gerenciamento e consulta de alunos" },
     { "name": "Ficha", "description": "Operações de consulta da ficha de treino" },
     { "name": "Frequência", "description": "Operações de registro de frequência" }
+    ,{ "name": "Health", "description": "Health check endpoint" }
   ],
   "paths": {
     "/auth/login": {
@@ -376,6 +377,30 @@
           "401": { "$ref": "#/components/responses/Unauthorized" },
           "403": { "$ref": "#/components/responses/Forbidden" },
           "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    }
+    ,
+    "/health": {
+      "get": {
+        "tags": ["Health"],
+        "summary": "Health check",
+        "responses": {
+          "200": {
+            "description": "Status da API",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string" },
+                    "uptime": { "type": "number" },
+                    "timestamp": { "type": "string", "format": "date-time" }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
