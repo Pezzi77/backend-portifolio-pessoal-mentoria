@@ -1,16 +1,20 @@
+const bcrypt = require('bcryptjs');
+
+// Senhas dos usuários seed são hasheadas no carregamento do módulo,
+// assim o login usa o mesmo bcrypt.compare dos usuários criados via API.
 const users = [
   {
     id: 'instrutor-0',
     name: 'felipe',
     email: 'felipe@academia.com',
-    password: '123456',
+    password: bcrypt.hashSync('123456', 10),
     role: 'instrutor'
   },
   {
     id: 'aluno-0',
     name: 'lucas',
     email: 'lucas@academia.com',
-    password: '123456',
+    password: bcrypt.hashSync('123456', 10),
     role: 'aluno'
   }
 ];
