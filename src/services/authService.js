@@ -1,9 +1,18 @@
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 const store = require('../models/inMemoryStore');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'mentor-secret';
+const SALT_ROUNDS = 10;
 
-const registerInstructor = ({ name, email, password }) => {
+// Remove o campo password antes de expor o usuário pela API.
+const omitPassword = (user) => {
+  if (!user) return user;
+  const { password, ...rest } = user;
+  return rest;
+};
+
+const registerInstructor = async ({ name, email, password }) => {
   const existing = store.getUserByEmail(email);
   if (existing) {
     const error = new Error('E-mail já cadastrado');
@@ -15,15 +24,15 @@ const registerInstructor = ({ name, email, password }) => {
     id: `instrutor-${Date.now()}`,
     name,
     email,
-    password,
+    password: await bcrypt.hash(password, SALT_ROUNDS),
     role: 'instrutor'
   };
 
   store.createUser(user);
-  return user;
+  return omitPassword(user);
 };
 
-const registerStudent = ({ name, email, password, age, height, weight }) => {
+const registerStudent = async ({ name, email, password, age, height, weight }) => {
   const existing = store.getUserByEmail(email);
   if (existing) {
     const error = new Error('E-mail já cadastrado');
@@ -35,7 +44,7 @@ const registerStudent = ({ name, email, password, age, height, weight }) => {
     id: `aluno-${Date.now()}`,
     name,
     email,
-    password,
+    password: await bcrypt.hash(password, SALT_ROUNDS),
     age,
     height,
     weight,
@@ -43,24 +52,28 @@ const registerStudent = ({ name, email, password, age, height, weight }) => {
   };
 
   store.createUser(user);
-  return user;
+  return omitPassword(user);
 };
 
-const login = ({ email, password }) => {
+const login = async ({ email, password }) => {
   const user = store.getUserByEmail(email);
-  if (!user || user.password !== password) {
+  // Mesma mensagem para e-mail inexistente e senha errada:
+  // não revela se o e-mail está cadastrado.
+  const senhaConfere = user && (await bcrypt.compare(password, user.password));
+  if (!senhaConfere) {
     const error = new Error('Credenciais inválidas');
     error.statusCode = 401;
     throw error;
   }
 
   const token = jwt.sign({ id: user.id, role: user.role }, JWT_SECRET, { expiresIn: '8h' });
-  return { token, user };
+  return { token, user: omitPassword(user) };
 };
 
-const getStudentById = (id) => store.getUserById(id);
+const getStudentById = (id) => omitPassword(store.getUserById(id));
 
-const getAllStudents = () => store.getUsers().filter((user) => user.role === 'aluno');
+const getAllStudents = () =>
+  store.getUsers().filter((user) => user.role === 'aluno').map(omitPassword);
 
 const createStudentSheet = (studentId, sheet) => {
   const student = getStudentById(studentId);

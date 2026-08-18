@@ -1,26 +1,26 @@
 const authService = require('../services/authService');
 
-const registerInstructor = (req, res, next) => {
+const registerInstructor = async (req, res, next) => {
   try {
-    const user = authService.registerInstructor(req.body);
+    const user = await authService.registerInstructor(req.body);
     res.status(201).json({ message: 'Instrutor cadastrado com sucesso', user });
   } catch (error) {
     next(error);
   }
 };
 
-const registerStudent = (req, res, next) => {
+const registerStudent = async (req, res, next) => {
   try {
-    const user = authService.registerStudent(req.body);
+    const user = await authService.registerStudent(req.body);
     res.status(201).json({ message: 'Aluno cadastrado com sucesso', user });
   } catch (error) {
     next(error);
   }
 };
 
-const login = (req, res, next) => {
+const login = async (req, res, next) => {
   try {
-    const result = authService.login(req.body);
+    const result = await authService.login(req.body);
     res.status(200).json(result);
   } catch (error) {
     next(error);
